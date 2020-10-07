@@ -7,10 +7,10 @@ import {
   createStyles,
   Theme,
 } from "@material-ui/core";
-import SearchTrack from "../../components/UI/SearchTrack";
+import SearchTrack from "../../components/SearchTrack";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers";
-import Spinner from "../../components/UI/Spinner";
+import Spinner from "../../components/UI/Spinner/index";
 import TrackList from "../../components/tracks/TrackList";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
       background: theme.palette.primary.main,
       padding: 50,
       marginBottom: 50,
+      [theme.breakpoints.down("sm")]: {
+        padding: 10,
+      },
     },
   })
 );
@@ -40,7 +43,7 @@ const SearchPage = () => {
     <>
       <Header title='Find your perfect match' />
       <Container>
-        <Box className={classes.searchWrapper} m={5}>
+        <Box className={classes.searchWrapper} m={3}>
           <SearchTrack setIsSearch={setIsSearch} />
         </Box>
         {isSearch && (

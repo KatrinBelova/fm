@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: "20px 5px",
     listStyleType: "none",
   },
+  bio: {
+    wordBreak: "break-word",
+  },
 }));
 
 const Artist: FC<ArtistProps> = ({ match }) => {
@@ -74,7 +77,7 @@ const Artist: FC<ArtistProps> = ({ match }) => {
                   </ListItem>
                 ))}
             </List>
-            <p>{bio?.summary}</p>
+            <p className={classes.bio}>{bio?.summary}</p>
           </Grid>
         </Grid>
       </Container>

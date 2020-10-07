@@ -2,11 +2,11 @@ import React from "react";
 import { Track } from "../../../models/tracksTypes";
 import TrackItem from "../TrackItem";
 import { makeStyles, List } from "@material-ui/core";
-import FmButton from "../../UI/FmButton";
+import FmButton from "../../UI/FmButton/index";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/reducers";
 import { loadMoreTracksAction } from "../../../redux/actions/tracksActions";
-import Spinner from "../../UI/Spinner";
+import Spinner from "../../UI/Spinner/index";
 
 type Props = {
   tracks?: Track[];
