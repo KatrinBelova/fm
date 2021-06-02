@@ -17,6 +17,7 @@ const initialState: TracksState = {
     },
   },
   isLoading: false,
+  isLoadingMore: false,
   error: null,
 };
 
@@ -48,7 +49,7 @@ export const tracksReducer = (
     case LOADMORE_TRACKS_START:
       return {
         ...state,
-        isLoading: true,
+        isLoadingMore: true,
       };
     case LOADMORE_TRACKS_SUCCESS:
       return {
@@ -57,13 +58,13 @@ export const tracksReducer = (
           track: [...state.data.track, ...action.payload.track],
           "@attr": action.payload["@attr"],
         },
-        isLoading: false,
+        isLoadingMore: false,
       };
     case LOADMORE_TRACKS_FAILURE:
       return {
         ...state,
         // error: action.payload.,
-        isLoading: false,
+        isLoadingMore: false,
       };
     default:
       return state;

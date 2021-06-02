@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     textDecoration: "none",
     display: "inline-flex",
     alignItems: "center",
+    '&:hover $arrowIcon': {
+      marginLeft: 5,
+      transition: '.25s ease-in-out'
+    }
   },
   imgWrapper: {
     position: "absolute",
@@ -43,6 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: `5px solid ${theme.palette?.darkBg?.main}`,
     boxShadow: `0px 0px 0px 5px ${theme.palette?.primary?.main}`,
   },
+  arrowIcon: {}
 }));
 
 const TrackItem = ({ name, mbid, image, artist }: Track) => {
@@ -50,13 +55,15 @@ const TrackItem = ({ name, mbid, image, artist }: Track) => {
 
   return (
     <ListItem className={classes.listItem}>
-      <div className={classes.imgWrapper}>
-        <img
-          className={classes.trackImg}
-          src={image ? image[0]?.["#text"] : ""}
-          alt={name}
-        />
-      </div>
+      {image && image[0] &&
+        <div className={classes.imgWrapper}>
+          <img
+            className={classes.trackImg}
+            src={image[0]?.["#text"] ?? ""}
+            alt='track'
+          />
+        </div>
+      }
       {artist && (
         <>
           {typeof artist === "object" ? (
@@ -65,7 +72,7 @@ const TrackItem = ({ name, mbid, image, artist }: Track) => {
               className={classes.artist}
             >
               <span>{artist?.name}</span>
-              <ArrowRightAltIcon />
+              <ArrowRightAltIcon className={classes.arrowIcon}/>
             </Link>
           ) : (
             <Box className={classes.artist}>

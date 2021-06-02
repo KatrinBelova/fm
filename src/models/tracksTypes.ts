@@ -29,6 +29,7 @@ export interface TracksData {
 export interface TracksState {
   data: TracksData;
   isLoading: boolean;
+  isLoadingMore: boolean;
   error: string | null | { message: string };
 }
 

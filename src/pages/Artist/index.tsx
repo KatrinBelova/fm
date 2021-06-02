@@ -1,9 +1,6 @@
 import React, { FC, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getArtistAction } from "../../redux/actions/artistAction";
-import { RootState } from "../../redux/reducers";
-import Header from "../../components/Header";
 import {
   Grid,
   Box,
@@ -13,6 +10,11 @@ import {
   ListItem,
   Theme,
 } from "@material-ui/core";
+import ReactHtmlParser from "react-html-parser";
+
+import { getArtistAction } from "../../redux/actions/artistAction";
+import { RootState } from "../../redux/reducers";
+import Header from "../../components/Header";
 
 type ArtistParams = {
   id: string;
@@ -77,7 +79,7 @@ const Artist: FC<ArtistProps> = ({ match }) => {
                   </ListItem>
                 ))}
             </List>
-            <p className={classes.bio}>{bio?.summary}</p>
+            <p className={classes.bio}>{ReactHtmlParser(bio?.summary || '')}</p>
           </Grid>
         </Grid>
       </Container>

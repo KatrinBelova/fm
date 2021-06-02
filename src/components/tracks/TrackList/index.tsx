@@ -29,6 +29,9 @@ const TrackList = ({ tracks }: Props) => {
   const totalPages = useSelector(
     (state: RootState) => state?.tracksData?.data?.["@attr"].totalPages
   );
+  const isLoadingMore = useSelector(
+    (state: RootState) => state?.tracksData?.isLoadingMore
+  );
   const isLoading = useSelector(
     (state: RootState) => state?.tracksData?.isLoading
   );
@@ -39,30 +42,39 @@ const TrackList = ({ tracks }: Props) => {
 
   return (
     <>
-      {tracks && tracks?.length > 0 ? (
-        <List component='ul' className={classes.list}>
-          {tracks?.map((item: Track, idx: number) => (
-            <TrackItem
-              key={`${item?.mbid}-${idx}`}
-              name={item?.name}
-              mbid={item?.mbid}
-              artist={item?.artist}
-              image={item?.image}
-            />
-          ))}
-        </List>
+      {isLoading ? (
+        <Spinner />
       ) : (
-        <p>"Ooops, Sorry! No tracks was found."</p>
-      )}
-      {isLoading && <Spinner />}
-      {tracks && tracks?.length > 0 && currPage < totalPages && (
-        <FmButton
-          color='primary'
-          variant='contained'
-          onClick={(e) => handleClick(e)}
-        >
-          Load More
-        </FmButton>
+        <>
+        {tracks && tracks?.length > 0 ? (
+          <List component='ul' className={classes.list}>
+            {tracks?.map((item: Track, idx: number) => (
+              <TrackItem
+                key={`${item?.mbid}-${idx}`}
+                name={item?.name}
+                mbid={item?.mbid}
+                artist={item?.artist}
+                image={item?.image}
+              />
+            ))}
+          </List>
+        ) : (
+          <p>"Ooops, Sorry! No tracks was found."</p>
+        )}
+        {isLoadingMore && <Spinner />}
+        {tracks 
+          && tracks?.length > 0 
+            && currPage < totalPages && (
+          <FmButton
+            color='primary'
+            variant='contained'
+            onClick={(e) => handleClick(e)}
+          >
+            Load More
+          </FmButton>
+        )}
+      </>
+        
       )}
     </>
   );
